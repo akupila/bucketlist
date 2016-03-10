@@ -10,7 +10,9 @@ Simple async task (promise) runner for node with a nice interface
 $ npm install --save bucketlist
 ```
 
-## Usage 
+## Usage
+
+_Go take a look at the [examples](https://github.com/akupila/bucketlist/tree/master/examples), probably clearer that way_
 
 ```javascript
 const bucketlist = require('bucketlist')
@@ -58,9 +60,11 @@ The signature is:
 
 ```javascript
 function run (log, data) {
-  // return promise
+  // return promise or value
 }
 ```
+
+You can return a value directly too (so it acts synchronously) however that's a bit pointless.. 
 
 ## Logging
 
