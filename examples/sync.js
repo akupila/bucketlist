@@ -2,20 +2,31 @@
 
 const bucketlist = require('..')
 
-const makeTask = (name, duration) => {
+const makeAsyncTask = (name, duration) => {
   return {
     name,
-    run: (log, data) => 'ok'
+    run: (log, data) => new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(name)
+      }, duration)
+    })
+  }
+}
+
+const makeSyncTask = (name) => {
+  return {
+    name,
+    run: (log, data) => name
   }
 }
 
 bucketlist([
-  makeTask('A', 200),
-  makeTask('B', 200),
+  makeAsyncTask('A', 200),
+  makeSyncTask('B'),
   [
-    makeTask('C', 200),
-    makeTask('D', 100),
-    makeTask('E', 300)
+    makeAsyncTask('C', 200),
+    makeSyncTask('D'),
+    makeAsyncTask('E', 300)
   ]
 ])
 .then(() => {
