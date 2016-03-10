@@ -1,8 +1,8 @@
 # bucketlist
 Simple async task (promise) runner for node with a nice interface
 
-[gif]
-[gif]
+![Things to do](screencapture/things-to-do.gif)
+![Parallel](screencapture/things-to-do.gif)
 
 ## Installation
 
