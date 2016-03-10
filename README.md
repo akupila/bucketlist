@@ -1,7 +1,11 @@
 # bucketlist
 Simple async task (promise) runner for node with a nice interface
 
+Example flow:
 ![Things to do](screencapture/things-to-do.gif)
+_the remaining "50 places" is an artifact in the gif, doesn't actually show up)_
+
+Parallel tasks
 ![Parallel](screencapture/things-to-do.gif)
 
 ## Installation
