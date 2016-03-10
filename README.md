@@ -7,7 +7,7 @@ Example flow:
 _(the remaining "50 places" is an artifact in the gif, doesn't actually show up like that)_
 
 Parallel tasks
-![Parallel](screencapture/things-to-do.gif)
+![Parallel](screencapture/parallel.gif)
 
 ## Installation
 
