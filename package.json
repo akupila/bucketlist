@@ -7,6 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ."
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:akupila/bucketlist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akupila/bucketlist/issues"
+  },
   "author": "Antti Kupila <akupila@gmail.com>",
   "license": "MIT",
   "keywords": [
