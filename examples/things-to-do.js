@@ -118,9 +118,9 @@ const doAllTheThingsIWantToDo = bucketlist([
 // -----------------------------------------------------
 
 doAllTheThingsIWantToDo
-.then(() => {
+.then((data) => {
   console.log()
-  console.log('All done!')
+  console.log('All done!', data)
 })
 .catch((error) => {
   console.log()

@@ -161,6 +161,7 @@ module.exports = function (taskList, config) {
     }, () => {
       resetCursor()
     })
+    .mapTo(data)
   })
   .toPromise()
 }
