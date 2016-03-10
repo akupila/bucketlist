@@ -5,7 +5,8 @@ const bucketlist = require('..')
 const makeTask = (name, duration) => {
   return {
     name,
-    run: () => new Promise((resolve, reject) => {
+    run: (log, data) => new Promise((resolve, reject) => {
+      log('log ' + name)
       setTimeout(resolve, duration)
     })
   }
@@ -23,3 +24,4 @@ bucketlist([
 .then(() => {
   console.log('done')
 })
+.catch(console.error)

@@ -4,7 +4,7 @@ const bucketlist = require('..')
 
 const learnToCount = {
   name: 'Learn to count to 10',
-  run: (data, log) => new Promise((resolve, reject) => {
+  run: (log, data) => new Promise((resolve, reject) => {
     let num = 1
     function count () {
       log(`Learned to count to ${num++}`)
@@ -21,26 +21,14 @@ const learnToCount = {
 const seeTheWorld = {
   name: 'See the world',
   id: 'world',
-  run: (data, log) => new Promise((resolve, reject) => {
-    resolve({ placesVisited: 50 })
-  })
+  run: (log, data) => Promise.resolve({ placesVisited: 50 })
 }
 
 const meetInterestingPeople = {
-  name: 'Try different foods',
-  run: (data, log) => new Promise((resolve, reject) => {
+  name: 'Meeting interesting people',
+  run: (log, data) => new Promise((resolve, reject) => {
     log(`Met interesting people in ${data.world.placesVisited} places`)
-    setTimeout(resolve, 500)
-  })
-}
-
-const masterJavaScript = {
-  name: 'Master JavaScipt',
-  run: (data, log) => new Promise((resolve, reject) => {
-    log('Practicing...')
-    setTimeout(function () {
-      reject('Uh oh, not perfect')
-    }, 2000)
+    setTimeout(resolve, 1000)
   })
 }
 
@@ -52,7 +40,7 @@ const learnToMakeFood = {
 
 const cookPasta = {
   name: 'Cook pasta',
-  run: (data, log) => new Promise((resolve, reject) => {
+  run: (log, data) => new Promise((resolve, reject) => {
     log(`Cooking ${data.foodSkill} pasta..`)
     setTimeout(resolve, 2500)
   })
@@ -60,7 +48,7 @@ const cookPasta = {
 
 const cookSteak = {
   name: 'Cook steak',
-  run: (data, log) => new Promise((resolve, reject) => {
+  run: (log, data) => new Promise((resolve, reject) => {
     log(`Cooking ${data.foodSkill} steak..`)
     setTimeout(resolve, 2000)
   })
@@ -68,7 +56,7 @@ const cookSteak = {
 
 const cookMushrooms = {
   name: 'Cook mushrooms',
-  run: (data, log) => new Promise((resolve, reject) => {
+  run: (log, data) => new Promise((resolve, reject) => {
     log(`Cooking ${data.foodSkill} mushrooms..`)
     setTimeout(resolve, 1500)
   })
@@ -76,7 +64,7 @@ const cookMushrooms = {
 
 const sleep = {
   name: 'Sleep',
-  run: (data, log) => new Promise((resolve, reject) => {
+  run: (log, data) => new Promise((resolve, reject) => {
     const duration = 1000
     const startSleep = Date.now()
     function sleep () {
@@ -92,6 +80,16 @@ const sleep = {
   })
 }
 
+const masterJavaScript = {
+  name: 'Master JavaScipt',
+  run: (log, data) => new Promise((resolve, reject) => {
+    log('Practicing...')
+    setTimeout(function () {
+      reject('Uh oh, JS-foo not perfect')
+    }, 2000)
+  })
+}
+
 const goToMars = {
   name: 'Go to Mars',
   run: new Promise((resolve, reject) => {})
@@ -99,6 +97,7 @@ const goToMars = {
 
 // -----------------------------------------------------
 
+console.log()
 console.log('Things to do before ⚰')
 console.log()
 const doAllTheThingsIWantToDo = bucketlist([
@@ -125,6 +124,5 @@ doAllTheThingsIWantToDo
 })
 .catch((error) => {
   console.log()
-  console.log('Failed:')
-  console.error(error.task.name + ': ' + error.message)
+  console.log(`Failed with error "${error}"`)
 })
