@@ -5,10 +5,7 @@ const bucketlist = require('..')
 const makeTask = (name, duration) => {
   return {
     name,
-    run: (log, data) => new Promise((resolve, reject) => {
-      log('log ' + name)
-      setTimeout(resolve, duration)
-    })
+    run: (log, data) => 'ok'
   }
 }
 

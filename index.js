@@ -66,7 +66,7 @@ module.exports = function (taskList, config) {
   function runTask (task) {
     return Rx.Observable.create((observer) => {
       observer.next(makeRenderCommand(task, states.RUNNING))
-      task.run((message) => {
+      Promise.resolve(task.run((message) => {
         // Task logged something
         // If value is 0-1 it's treated as a percentage
         const str = typeof message === 'number' && message <= 1
@@ -74,7 +74,7 @@ module.exports = function (taskList, config) {
           : message
         // Emit so we re-render
         observer.next(makeRenderCommand(task, states.RUNNING, str))
-      }, data)
+      }, data))
       .then((result) => {
         // Task finished
         if (task.id) {
