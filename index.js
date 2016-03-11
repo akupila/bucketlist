@@ -134,6 +134,8 @@ module.exports = function (taskList, config) {
       charm.destroy()
     }
 
+    process.on('exit', resetCursor)
+
     return Rx.Observable.concat(
       // Empty list first
       initialList,
