@@ -68,15 +68,24 @@ module.exports = function (taskList, config) {
   function runTask (task) {
     return Rx.Observable.create((observer) => {
       observer.next(makeRenderCommand(task, states.RUNNING))
-      Promise.resolve(task.run((message) => {
-        // Task logged something
-        // If value is 0-1 it's treated as a percentage
-        const str = typeof message === 'number' && message <= 1
-          ? Math.round(message * 100) + '%'
-          : message
-        // Emit so we re-render
-        observer.next(makeRenderCommand(task, states.RUNNING, str))
-      }, data))
+
+      let result
+      try {
+        result = task.run((message) => {
+          // Task logged something
+          // If value is 0-1 it's treated as a percentage
+          const str = typeof message === 'number' && message <= 1
+            ? Math.round(message * 100) + '%'
+            : message
+          // Emit so we re-render
+          observer.next(makeRenderCommand(task, states.RUNNING, str))
+        }, data)
+        result = result instanceof Promise ? result : Promise.resolve(result)
+      } catch (error) {
+        result = Promise.reject(error)
+      }
+
+      result
       .then((result) => {
         // Task finished
         if (task.id) {
@@ -87,7 +96,7 @@ module.exports = function (taskList, config) {
       })
       .catch((error) => {
         // Render error
-        observer.next(makeRenderCommand(task, states.ERROR, error))
+        observer.next(makeRenderCommand(task, states.ERROR, error.toString()))
         // Emitting an error will stop further tasks from running
         observer.error(error)
       })
@@ -175,13 +184,14 @@ module.exports = function (taskList, config) {
       }
       charm.write('\n')
       return task
-    }, () => {
-      // Error
-      resetCursor()
-    }, () => {
+    }, null, () => {
       resetCursor()
     })
     .mapTo(data)
+    .catch((error) => {
+      resetCursor()
+      throw error
+    })
   })
   .toPromise()
 }
