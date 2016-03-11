@@ -1,4 +1,8 @@
 # bucketlist
+
+[![build status](https://travis-ci.org/akupila/bucketlist.svg?branch=master)](https://travis-ci.org/akupila/bucketlist)
+[![Coverage Status](https://coveralls.io/repos/github/akupila/bucketlist/badge.svg?branch=master)](https://coveralls.io/github/akupila/bucketlist?branch=master)
+
 Simple async task (promise) runner for node with a nice interface
 
 Example flow:
