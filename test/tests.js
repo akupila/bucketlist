@@ -7,8 +7,18 @@ process.env.NODE_ENV = 'test'
 const bucketlist = require('..')
 const expect = require('expect.js')
 const sinon = require('sinon')
+const shhh = require('shhh')
 
 describe('bucketlist', () => {
+  it('should do nothing with empty task list', (done) => {
+    shhh.enable()
+    bucketlist([])
+    .then(() => {
+      done()
+    })
+    shhh.disable()
+  })
+
   it('should run tasks in sequence', (done) => {
     let firstCalled = false
     let secondCalled = false
